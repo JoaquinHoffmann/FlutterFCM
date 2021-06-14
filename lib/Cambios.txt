@@ -1,0 +1,12 @@
+ - https://www.youtube.com/watch?v=4Cwp1iA8BaQ (Firebase Messaging (Foreground & Background) Notification Complete Tutorial + Source)
+    - Traté de actuaizar a null safety (no funcionó por culpa de un paquete que no tiene disponible)
+        Fue con 'dart pub upgrade --null-safety' y luego 'dart pub get'
+    - Escribir las funciones:
+        - Crea una carpeta 'function' con un archivo 'sendnotif.js'
+        -
+        - Proyecto > Project Settings > Service Account > Generate and download private key (el archivo json se giarda en alguna parte y el path de eso se pone en los archivos .js que se generaron)
+        - Me fuí a la carpeta 'function' que cree y corrí:
+            - npm init
+            - firebase init (primero tendría que haber hecho un login, pero ya lo tenía) (no quise eslint)
+            - El tipo corre 'npm install --save firebase-admin'
+            - Una vez listo el código en sendnotif.js, firebase deploy
