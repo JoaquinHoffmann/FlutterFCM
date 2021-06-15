@@ -10,3 +10,7 @@
             - firebase init (primero tendría que haber hecho un login, pero ya lo tenía) (no quise eslint)
             - El tipo corre 'npm install --save firebase-admin'
             - Una vez listo el código en sendnotif.js, firebase deploy
+
+--------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
+
+ -Voy a este https://www.youtube.com/watch?v=rSYDs079p8o (Flutter FCM | Send Notification TO Topic And Send Broadcast Notifications Complete Guide + Source)

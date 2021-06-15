@@ -104,36 +104,38 @@ class _MyAppState extends State<MyApp> {
             itemCount: topics.length,
             itemBuilder: (context, index) => ListTile(
               title: Text(topics[index]),
+              // El trailing a continuación revisa primero que los topicos estén suscritos
               trailing: subscribed.contains(topics[index])
                   ? ElevatedButton(
                 onPressed: () async {
-                  print('Hola');
-                  // await FirebaseMessaging.instance
-                  //     .unsubscribeFromTopic(topics[index]);
-                  // await FirebaseFirestore.instance
-                  //     .collection('topics')
-                  //     .doc(token)
-                  //     .update({topics[index]: FieldValue.delete()});
-                  // setState(() {
-                  //   subscribed.remove(topics[index]);
-                  // });
+                  // Al apretar en un un tópico suscrito se desinscribe y elimina el campo
+                  print('Hola1');
+                  await FirebaseMessaging.instance
+                      .unsubscribeFromTopic(topics[index]);
+                  await FirebaseFirestore.instance
+                      .collection('topics')
+                      .doc(token)
+                      .update({topics[index]: FieldValue.delete()});
+                  setState(() {
+                    subscribed.remove(topics[index]);
+                  });
                 },
                 child: Text('unsubscribe'),
               )
                   : ElevatedButton(
                   onPressed: () async {
                     print('object');
-                  //   await FirebaseMessaging.instance
-                  //       .subscribeToTopic(topics[index]);
+                    await FirebaseMessaging.instance
+                        .subscribeToTopic(topics[index]);
 
-                  //   await FirebaseFirestore.instance
-                  //       .collection('topics')
-                  //       .doc(token)
-                  //       .set({topics[index]: 'subscribe'},
-                  //       SetOptions(merge: true));
-                  //   setState(() {
-                  //     subscribed.add(topics[index]);
-                  //   });
+                    await FirebaseFirestore.instance
+                        .collection('topics')
+                        .doc(token)
+                        .set({topics[index]: 'subscribe'},
+                        SetOptions(merge: true));
+                    setState(() {
+                      subscribed.add(topics[index]);
+                    });
                   },
                    child: Text('subscribe')
                   ),
@@ -145,23 +147,25 @@ class _MyAppState extends State<MyApp> {
   getToken() async {
     token = await FirebaseMessaging.instance.getToken();
     setState(() {
-      token = token;
+      token = token; //Para que el token esté dispónible en el resto del programa
     });
     print('Tu token es:\n\n\n $token \n\n\n');
   }
 
-  // getTopics() async {
-  //   await FirebaseFirestore.instance
-  //       .collection('places')
-  //       .get()
-  //       .then((value) => value.docs.forEach((element) {
-  //     if (token == element.id) {
-  //       subscribed = element.data().keys.toList();
-  //     }
-  //   }));
+  getTopics() async {
+    await FirebaseFirestore.instance
+        .collection('topics')
+        .get()
+        .then((value) => value.docs.forEach((element) {
+      if (token == element.id) {
+        // En este caso estamos tomando element = documento de la colección
+        // Da una lista con los documentos suscritos por el usuario (que tienen la palabra 'subscribed' dentro y coicide el token)
+        subscribed = element.data().keys.toList();
+      }
+    }));
 
-  //   setState(() {
-  //     subscribed = subscribed;
-  //   });
-  // }
+    setState(() {
+      subscribed = subscribed;
+    });
+  }
 }
