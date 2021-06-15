@@ -4,6 +4,7 @@ import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
   print('Handling a background message ${message.messageId}');
@@ -89,7 +90,7 @@ class _MyAppState extends State<MyApp> {
       }
     });
     getToken();
-    getTopics();
+    //getTopics();
   }
 
   @override
@@ -106,36 +107,39 @@ class _MyAppState extends State<MyApp> {
               trailing: subscribed.contains(topics[index])
                   ? ElevatedButton(
                 onPressed: () async {
-                  await FirebaseMessaging.instance
-                      .unsubscribeFromTopic(topics[index]);
-                  await FirebaseFirestore.instance
-                      .collection('topics')
-                      .doc(token)
-                      .update({topics[index]: FieldValue.delete()});
-                  setState(() {
-                    subscribed.remove(topics[index]);
-                  });
+                  print('Hola');
+                  // await FirebaseMessaging.instance
+                  //     .unsubscribeFromTopic(topics[index]);
+                  // await FirebaseFirestore.instance
+                  //     .collection('topics')
+                  //     .doc(token)
+                  //     .update({topics[index]: FieldValue.delete()});
+                  // setState(() {
+                  //   subscribed.remove(topics[index]);
+                  // });
                 },
                 child: Text('unsubscribe'),
               )
                   : ElevatedButton(
                   onPressed: () async {
-                    await FirebaseMessaging.instance
-                        .subscribeToTopic(topics[index]);
+                    print('object');
+                  //   await FirebaseMessaging.instance
+                  //       .subscribeToTopic(topics[index]);
 
-                    await FirebaseFirestore.instance
-                        .collection('topics')
-                        .doc(token)
-                        .set({topics[index]: 'subscribe'},
-                        SetOptions(merge: true));
-                    setState(() {
-                      subscribed.add(topics[index]);
-                    });
+                  //   await FirebaseFirestore.instance
+                  //       .collection('topics')
+                  //       .doc(token)
+                  //       .set({topics[index]: 'subscribe'},
+                  //       SetOptions(merge: true));
+                  //   setState(() {
+                  //     subscribed.add(topics[index]);
+                  //   });
                   },
-                  child: Text('subscribe')),
+                   child: Text('subscribe')
+                  ),
             ),
-          )),
-    );
+          ),
+    ));
   }
 
   getToken() async {
@@ -143,21 +147,21 @@ class _MyAppState extends State<MyApp> {
     setState(() {
       token = token;
     });
-    print(token);
+    print('Tu token es:\n\n\n $token \n\n\n');
   }
 
-  getTopics() async {
-    await FirebaseFirestore.instance
-        .collection('topics')
-        .get()
-        .then((value) => value.docs.forEach((element) {
-      if (token == element.id) {
-        subscribed = element.data().keys.toList();
-      }
-    }));
+  // getTopics() async {
+  //   await FirebaseFirestore.instance
+  //       .collection('places')
+  //       .get()
+  //       .then((value) => value.docs.forEach((element) {
+  //     if (token == element.id) {
+  //       subscribed = element.data().keys.toList();
+  //     }
+  //   }));
 
-    setState(() {
-      subscribed = subscribed;
-    });
-  }
+  //   setState(() {
+  //     subscribed = subscribed;
+  //   });
+  // }
 }
