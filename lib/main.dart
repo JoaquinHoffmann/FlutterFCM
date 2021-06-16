@@ -1,9 +1,11 @@
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
+import 'package:flutter_fcm/User/bloc/bloc_user.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'package:flutter_fcm/User/ui/screens/sign_in_screen.dart';
 
 Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp();
@@ -95,7 +97,46 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return BlocProvider(
+      bloc: UserBloc(),
+      child: MaterialApp(
+        //Queremos exponer el bloc desde el widget más alto, que es este
+        title: 'Hola mundo',
+        theme: ThemeData(),
+        home: SignInScreen(),
+      ),
+    );
+  }
+  getToken() async {
+  var token = await FirebaseMessaging.instance.getToken();
+  setState(() {
+    token = token; //Para que el token esté dispónible en el resto del programa
+  });
+  print('Tu token es:\n\n\n $token \n\n\n');
+}
+getTopics() async {
+    await FirebaseFirestore.instance
+        .collection('topics')
+        .get()
+        .then((value) => value.docs.forEach((element) {
+      if (token == element.id) {
+        // En este caso estamos tomando element = documento de la colección
+        // Da una lista con los documentos suscritos por el usuario (que tienen la palabra 'subscribed' dentro y coicide el token)
+        subscribed = element.data().keys.toList();
+      }
+    }));
+    setState(() {
+      subscribed = subscribed;
+    });
+  }
+}
+
+
+
+  
+
+
+/*return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
             title: Text('appbar'),
@@ -141,31 +182,4 @@ class _MyAppState extends State<MyApp> {
                   ),
             ),
           ),
-    ));
-  }
-
-  getToken() async {
-    token = await FirebaseMessaging.instance.getToken();
-    setState(() {
-      token = token; //Para que el token esté dispónible en el resto del programa
-    });
-    print('Tu token es:\n\n\n $token \n\n\n');
-  }
-
-  getTopics() async {
-    await FirebaseFirestore.instance
-        .collection('topics')
-        .get()
-        .then((value) => value.docs.forEach((element) {
-      if (token == element.id) {
-        // En este caso estamos tomando element = documento de la colección
-        // Da una lista con los documentos suscritos por el usuario (que tienen la palabra 'subscribed' dentro y coicide el token)
-        subscribed = element.data().keys.toList();
-      }
-    }));
-
-    setState(() {
-      subscribed = subscribed;
-    });
-  }
-}
+    ));*/
