@@ -7,6 +7,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 //import 'package:firebase_auth/firebase_auth.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class SignInScreen extends StatefulWidget {
   @override
@@ -70,13 +71,15 @@ class _SignInScreenState extends State<SignInScreen> {
                 buttonText: "Login with Gmail",
                 onPressed: () {
                   userBloc.signOut();
-                  userBloc.signIn().then((User user) {
+                  userBloc.signIn().then((User user) async {
+                    String token = await FirebaseMessaging.instance.getToken();
                     //Acá User es un objeto de firebase que sale de cuando hacemos signIn, por esto cree el otro como UserPL
                     userBloc.updateUserData(UserPL(
                         uid: user.uid,
                         name: user.displayName,
                         email: user.email,
-                        photoURL: user.photoURL));
+                        photoURL: user.photoURL,
+                        dispositivo: token));
                   });
                 },
                 width: 300.0,

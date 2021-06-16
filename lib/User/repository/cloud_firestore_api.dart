@@ -21,7 +21,8 @@ class CloudFirestoreAPI {
       'photoURL': userPL.photoURL,
       'myPlaces': userPL.myPlaces,
       'myFavoritePlaces': userPL.myFavoritePlaces,
-      'lastSignIn': DateTime.now()
+      'lastSignIn': DateTime.now(),
+      'dispositivo': userPL.dispositivo
     }, SetOptions(merge: true));
   }
 

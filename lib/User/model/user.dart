@@ -8,6 +8,7 @@ class UserPL {
   final String photoURL;
   final List<Place> myPlaces;
   final List<Place> myFavoritePlaces;
+  final String dispositivo;
 
   //myFavoritePlaces
   //Places
@@ -19,5 +20,6 @@ class UserPL {
       @required this.email,
       @required this.photoURL,
       this.myPlaces,
-      this.myFavoritePlaces});
+      this.myFavoritePlaces,
+      this.dispositivo});
 }

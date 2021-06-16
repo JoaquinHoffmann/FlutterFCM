@@ -8,44 +8,32 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-export.mensajeGeneral(){
-    var usuarios = [];
-    const col = await db.collection('users').get();
-    col.forEach((doc)=>{
-        usuarios.push(doc.id);
-    })
-    console.log(topics)
-    var message = {
-        notification: {
-          title: 'Gracias por elegir Civilis',
-          body: 'Te enviaremos información cada vez que llegue una propuesta e tú interés'}
-    };
-    admin.messaging().sendToDevice(usuarios,message)
-        .then((response) => {
-            // Response is a message ID string.
-            console.log('Mensaje enviado con éxito:', response);
-        })
-        .catch((error) => {
-            console.log('Error enviando el mensaje:', error);
-        });
-}
-// This registration token comes from the client FCM SDKs.
+exports.sendChatNotifications = functions.firestore.document('channels/{cid}/thread/{did}').onCreate(async (threadSnapshot, context) => {
+  const thread = threadSnapshot.data();
+  const senderId = thread.senderID;
 
-//token: registrationToken
+  console.log(`Finding channel participants with channel ${context.params.cid}`);
+  const participants = await admin.firestore().collection('channel_participation').where('channel', '==', context.params.cid).get();
+  if (participants.empty) {
+    console.log('There are no participants to send to.');
+    return;
+  }
 
+  participants.forEach(async (snapshot) => {
+    const uid = snapshot.data().user;
+    if (uid === senderId) { return; }
 
+    const user = await admin.firestore().doc(`users/${uid}`).get();
 
-exports.sendPushNotification = functions.firestore.document('/places/{notificationId}').onCreate((snap, context) => {
-    var values = snap.data();
-    var token = values.fcmToken;     
-    
-    var payload = {
+    const payload = {
       notification: {
-        title: "Tutulo correspondiente", //values.title,
-        body: "Cuerpo correspondiente"//values.message
-        }    
-    }   
-
-    return mensajeGeneral();
-    //return admin.messaging().sendToDevice(token, payload);
+        title: thread.senderFirstName,
+        body: thread.content,
+        icon: thread.senderProfilePictureURL,
+        image: thread.url,
+        sound: 'default',
+      }
+    };
+    await admin.messaging().sendToDevice([user.data().fcmToken], payload);
   });
+});

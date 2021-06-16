@@ -14,3 +14,10 @@
 --------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
 
  -Voy a este https://www.youtube.com/watch?v=rSYDs079p8o (Flutter FCM | Send Notification TO Topic And Send Broadcast Notifications Complete Guide + Source)
+
+--------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
+
+Ahora estoy tratando de mandar notificaciones al subir un nuevo lugar, necesito una función que se gatille
+cuando alguien suba un nuevo documento a places, esto se hace con onCreate, parece que en este ink lo hacen:
+
+https://pulkitgoyal.in/send-notifications-with-firebase-from-firestore-events-using-cloud-functions
