@@ -21,3 +21,12 @@ Ahora estoy tratando de mandar notificaciones al subir un nuevo lugar, necesito 
 cuando alguien suba un nuevo documento a places, esto se hace con onCreate, parece que en este ink lo hacen:
 
 https://pulkitgoyal.in/send-notifications-with-firebase-from-firestore-events-using-cloud-functions
+
+--------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
+
+- Hice funcionar el emulador de firebase, los codigos una vez hecho ya el init y creada la carpeta functions y firebase tools (pasos anteriores más arriba) son:
+                       
+        - firebase init emulators                      
+        - firebase emulators:start  
+Tuve que agregar unos permisos para poder usar credenciales de administrador en las funciones emuladas, se explican en esta pagina:
+https://firebase.google.com/docs/functions/local-emulator es solo agregar una clave de cuenta de servicio desde la CLI

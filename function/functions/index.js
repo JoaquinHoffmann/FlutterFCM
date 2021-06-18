@@ -8,32 +8,56 @@ admin.initializeApp({
   credential: admin.credential.cert(serviceAccount)
 });
 
-exports.sendChatNotifications = functions.firestore.document('channels/{cid}/thread/{did}').onCreate(async (threadSnapshot, context) => {
-  const thread = threadSnapshot.data();
-  const senderId = thread.senderID;
-
-  console.log(`Finding channel participants with channel ${context.params.cid}`);
-  const participants = await admin.firestore().collection('channel_participation').where('channel', '==', context.params.cid).get();
-  if (participants.empty) {
-    console.log('There are no participants to send to.');
+exports.sendChatNotifications = functions.region('southamerica-east1').firestore.document('places/{placeid}')
+.onCreate(async (placeSnapshot, context) => {
+  const foto = placeSnapshot.data();
+  const creadorID = String(foto.userOwner);
+  justUser = creadorID.replace("users/","");
+  console.log('El duenio sera: ', justUser);
+  const creadorDoc = await admin.firestore().collection('users').doc(justUser).get();
+  //firebase.firestore().collection('status').doc(creadorID).get();
+  if (creadorDoc.empty) {
+    console.log('No se encontró al creador');
     return;
+  } else {
+    console.log('Document token:', creadorDoc.data().dispositivo);
   }
 
-  participants.forEach(async (snapshot) => {
-    const uid = snapshot.data().user;
-    if (uid === senderId) { return; }
-
-    const user = await admin.firestore().doc(`users/${uid}`).get();
-
-    const payload = {
-      notification: {
-        title: thread.senderFirstName,
-        body: thread.content,
-        icon: thread.senderProfilePictureURL,
-        image: thread.url,
-        sound: 'default',
-      }
-    };
-    await admin.messaging().sendToDevice([user.data().fcmToken], payload);
-  });
+  // participants.forEach(async (snapshot) => {
+  //   const uid = snapshot.data().user;
+  //   if (uid === creadorId) { return; }
+    
+  //   const user = await admin.firestore().doc(`users/${uid}`).get(); //Objeto escucha
+  //   const payload = {
+  //     notification: {
+  //       title: 'Notificacion de envío',//thread.senderFirstName,
+  //       body: foto.description,
+  //       //icon: thread.senderProfilePictureURL,
+  //       //image: thread.url,
+  //       sound: 'default',
+  //     }
+  //   };
+  //   await admin.messaging().sendToDevice([user.data().fcmToken], payload);
+  // });
 });
+
+// exports.makeUppercase = functions.region('southamerica-east1').firestore.document('places/{placeId}')
+// .onCreate((snap, context) => {
+//   const original = snap.data().original;
+//   console.log('Hola mundo', context.params.placeId, original);
+//   const uppercase = "procesada";//original.toUpperCase();
+//   return snap.ref.set({uppercase}, {merge: true});
+// });
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+/////// PARA USAR EMULADORES:                         ////////////////////////////////////////
+///////- firebase init emulators                      ////////////////////////////////////////
+///////- firebase emulators:start                     ////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////
+

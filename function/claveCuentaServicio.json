@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "platzitripsflutter-eff5b",
+  "private_key_id": "aa0b11016efd3fa3ad5f26024e5b103101875499",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCI5yI3e0/DXnRs\n9XRwAGt/yQty9QCLjoVgW1S9GRWYUYchi5uneIK2+1Uv7p7BNUV7B8tZXr7pwRIt\nTvLE/phkKRkVC3505zkaURS/lHOITyWkZoB+Eq2x+SU3Gjko5kSj8RX7lBGmdlJa\nMMJUU0RIrD3Q3TjA8cjlzCJEgbg5njvqqrGcbYidK/WZafLacMBtSdOYrEAHH6gm\nczTlzUSRtRUdvcOnE299AgmyftdZFcEw9CxvXICDIRrlXrygJ0rxhzFVxJ2sui6J\n9+pU79nCKi+LBu5GO9pld1yFfYiEkuKuDHzrE7MG/E7XVv2LG8cNUcAEDdrtMogO\ntIxYskbvAgMBAAECggEAAMguhi9FIFziFgaSOLA37PiYASXBxV+gsWaJewmxTuJq\n/te49uGVquKP9QB26wGZOP+tZgBINODub/slyyxCcJKvhahAJlN1HF+0L6KdxPyM\nFClQYz1LaAXVSZWebUu2E/2k3iqqrc8P31tXRiYHm3v9tRCzv0kM7bXByFm5VKg+\n6bKddzr339eW5ypBa8QBA/4HbKQPJyOJ9mfGK+QUKTV/q+fIQbCDBSEKd/H/ANzU\n70TbIzjK6iupdIjljnpZVFqCHKmT4JY41Fz2KegNQKYjX6RlE/6PCnSUJlj7UsmL\nFmaMGrhAH/TNet5QTwZpaTvBdsMdg5xABW1RTdIVaQKBgQDAFSQtpqU09floY/yc\n+kRWFPA7CkaBcSht+DYg4yDZ6KYEqTGDfZDgl4TS6TZWV4ZbJknyyiTjX3/ez8zO\nzLUrYmdiagw8UwKkG9kHW6lguN7S6+Pj+54kvSWYTek7+FuDJoM+Z/o/UoPvve9R\n6jWok5yc7AGDqPk6pBZXDCrgVQKBgQC2dWu7ddPhkwwzVQFWUS3uyvvY1slGxV1I\nzucyyUjDI+87Q3Q0NqmCmq0iDSAwoe3pu+8E7uV0W/9pFgNkHACApVjvoWOqadWT\nJf/6xZvZcL/Vl1ENN3zb8fujq0se4rRhnpT7FMBs8+SVH3kaL5DKmbxpLf4EtFBZ\nuB72SYc+MwKBgA1PKbOUEWxrAr4N94n0+VkxmDevDZWYfqGoCjAbLMKMkTxPcOPY\nhnpZZVWr3Rz8cY3NSGBvS0EJ8/U/VsSZgJAiAGHcUT64zb0LRO1yl3jhNmdM+vxo\nCdwn0vwLofaKzeR3fa6MS9WpZQTuly+I1/D3UWm6HJy/z40Vo4qiiDIFAoGAQVHM\nHbJTBkCEb6QQ9Hvfe8uDWd+a8xEZEkWwE0hoGiQ1Mvw1D7Q5/x2subIFQiPWboTv\nTs7PqlZ9G3vb/uzfaS7IphEbAxkccq958qbn4nIw2yBuzdJ9iqgYtEFQhWAXv5Ls\nNu747Ihr3s8DpdI9faqH/weOFtUOpu/5daZhGm0CgYAeOY3PGx0PbE8XGpBJ0lGY\n504a5uCA1xMOEKvrzw6y+Qtr+F/9l9WBdZ5FgBLfscE4Q5WIXYoldmQDgN2n5/su\nGqMJHBDD6sysFMSPwk9GjUGXlGk8IbbakqwdIUQ0JDbfy+RNKUPIhfYgj1HRxIrf\nFocqSLdgAQNn2W0nCNjn5w==\n-----END PRIVATE KEY-----\n",
+  "client_email": "firebase-adminsdk-hvibe@platzitripsflutter-eff5b.iam.gserviceaccount.com",
+  "client_id": "112223106391249030062",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-hvibe%40platzitripsflutter-eff5b.iam.gserviceaccount.com"
+}
