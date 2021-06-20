@@ -68,7 +68,7 @@ class _MyAppState extends State<MyApp> {
   void initState() {
     super.initState();
     var initialzationSettingsAndroid =
-    AndroidInitializationSettings('@mipmap/ic_launcher');
+    AndroidInitializationSettings('@drawable/logo_notificaciones');
     var initializationSettings =
     InitializationSettings(android: initialzationSettingsAndroid);
 
@@ -91,7 +91,7 @@ class _MyAppState extends State<MyApp> {
             ));
       }
     });
-    getToken();
+    //getToken();
     //getTopics();
   }
 
@@ -107,28 +107,28 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-  getToken() async {
-  var token = await FirebaseMessaging.instance.getToken();
-  setState(() {
-    token = token; //Para que el token esté dispónible en el resto del programa
-  });
-  print('Tu token es:\n\n\n $token \n\n\n');
-}
-getTopics() async {
-    await FirebaseFirestore.instance
-        .collection('topics')
-        .get()
-        .then((value) => value.docs.forEach((element) {
-      if (token == element.id) {
-        // En este caso estamos tomando element = documento de la colección
-        // Da una lista con los documentos suscritos por el usuario (que tienen la palabra 'subscribed' dentro y coicide el token)
-        subscribed = element.data().keys.toList();
-      }
-    }));
-    setState(() {
-      subscribed = subscribed;
-    });
-  }
+//   getToken() async {
+//   var token = await FirebaseMessaging.instance.getToken();
+//   setState(() {
+//     token = token; //Para que el token esté dispónible en el resto del programa
+//   });
+//   print('Tu token es:\n\n\n $token \n\n\n');
+// }
+// getTopics() async {
+//     await FirebaseFirestore.instance
+//         .collection('topics')
+//         .get()
+//         .then((value) => value.docs.forEach((element) {
+//       if (token == element.id) {
+//         // En este caso estamos tomando element = documento de la colección
+//         // Da una lista con los documentos suscritos por el usuario (que tienen la palabra 'subscribed' dentro y coicide el token)
+//         subscribed = element.data().keys.toList();
+//       }
+//     }));
+//     setState(() {
+//       subscribed = subscribed;
+//     });
+//   }
 }
 
 

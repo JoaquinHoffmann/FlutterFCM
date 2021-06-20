@@ -30,3 +30,23 @@ https://pulkitgoyal.in/send-notifications-with-firebase-from-firestore-events-us
         - firebase emulators:start  
 Tuve que agregar unos permisos para poder usar credenciales de administrador en las funciones emuladas, se explican en esta pagina:
 https://firebase.google.com/docs/functions/local-emulator es solo agregar una clave de cuenta de servicio desde la CLI
+
+--------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
+
+firebase emulators:start --import=./dir (para importar las colecciones)
+firebase emulators:export ./dir     (para exportar)
+
+- Función que acumula tokens de usuarios en users/Dispositivos y el field "dispositivo"
+- Funciones que mandan notificacion al creador de una prpuesta y otra que manda al publico general
+
+--------------------------------------------------------- ESTO YA LO HICE ------------------------------------------------
+Ver borrar lineas de código para que me funcione en Huawei (evitar ese error wp[]...)
+
+Para poner un ícono personalizado en las notificaciones, esto se hace en el AndroidManifest.xml (personalizar ícono y color)
+/////////////////////////////////////////////////////////////////////////////////
+<meta-data
+        android:name="com.google.firebase.messaging.default_notification_icon"
+        android:resource="@drawable/notification_icon" />
+<meta-data android:name="com.google.firebase.messaging.default_notification_color"
+        android:resource="@color/google_blue" />
+////////////////////////////////////////////////////////////////////////////////

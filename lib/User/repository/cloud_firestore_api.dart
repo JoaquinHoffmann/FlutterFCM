@@ -37,6 +37,7 @@ class CloudFirestoreAPI {
       'urlImage': place.urlImage,
       'userOwner':
           _db.doc("$USERS/${user.uid}"), //tipo de dato conocido como reference
+      'userDirection': "$USERS/${user.uid}", //Lo necesito como string
     }).then((DocumentReference dr) => {
           dr.get().then((DocumentSnapshot snapshot) {
             DocumentReference refUsers = _db.collection(USERS).doc(user
